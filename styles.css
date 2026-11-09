@@ -1,0 +1,110 @@
+/* Collapsed post: hide everything except our bar. */
+.aif-collapsed > :not(.aif-bar) {
+  display: none !important;
+}
+
+.aif-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.6);
+  background: #f3f2ef;
+  border-radius: 8px;
+}
+
+.aif-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aif-toggle {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0a66c2;
+  background: transparent;
+  border: 1px solid #0a66c2;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.aif-toggle:hover {
+  background: rgba(10, 102, 194, 0.08);
+}
+
+/* Ads: tagged .aif-ad by content.js, hidden only while the setting is on. */
+html.aif-hide-ads .aif-ad,
+html.aif-hide-ads .ad-banner-container,
+html.aif-hide-ads [data-ad-banner] {
+  display: none !important;
+}
+
+/* Click-to-hide: items the user hid, plus the picker overlay. */
+.aif-user-hidden {
+  display: none !important;
+}
+
+/* Crosshair everywhere except our own pill (so "Done" shows a pointer). */
+html.aif-picking,
+html.aif-picking *:not(.aif-pick-banner, .aif-pick-banner *) {
+  cursor: crosshair !important;
+}
+
+.aif-pick-box {
+  position: fixed;
+  z-index: 2147483646;
+  pointer-events: none;
+  outline: 2px solid #ff3b30;
+  background: rgba(255, 59, 48, 0.12);
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.aif-pick-banner {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 6px 6px 14px;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #d1d1d6;
+  background: #2c2c2e;
+  border: 1px solid #3a3a3c;
+  border-radius: 20px;
+  box-shadow: none;
+  white-space: nowrap;
+  cursor: default !important;
+}
+
+.aif-pick-icon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.aif-pick-done {
+  padding: 4px 14px;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: #0a84ff;
+  border: 0;
+  border-radius: 14px;
+  box-shadow: none;
+  cursor: pointer !important;
+}

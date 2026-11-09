@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "LinkedIn AI Slop Filter",
+  "version": "1.0.0",
+  "description": "Collapses AI-generated posts in your LinkedIn feed using local heuristics, with optional Ollama classification for borderline posts.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "http://localhost:11434/*",
+    "http://127.0.0.1:11434/*",
+    "https://api.anthropic.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.linkedin.com/*"],
+      "js": ["heuristics.js", "content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "LinkedIn AI Slop Filter"
+  }
+}

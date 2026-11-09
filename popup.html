@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body {
+      width: 280px;
+      margin: 0;
+      padding: 16px;
+      font-family: -apple-system, system-ui, sans-serif;
+      font-size: 13px;
+      color: #1d1d1f;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 14px;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #999;
+    }
+    .dot.on { background: #34c759; }
+    .dot.off { background: #ff3b30; }
+    select, input[type="number"], input[type="password"] {
+      font-size: 12px;
+      padding: 2px 4px;
+      max-width: 140px;
+    }
+    .muted {
+      color: #6e6e73;
+      font-size: 11px;
+      margin-top: 8px;
+    }
+    .stat {
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <h1>LinkedIn AI Slop Filter</h1>
+
+  <div class="row">
+    <label for="enabled">Filtering</label>
+    <input type="checkbox" id="enabled" />
+  </div>
+
+  <div class="row">
+    <label for="hideAds">Hide ads</label>
+    <input type="checkbox" id="hideAds" />
+  </div>
+
+  <div class="row">
+    <button id="pick" type="button" title="Then click anything on the page to hide it. Esc to finish.">Hide distracting items…</button>
+    <span class="muted" style="margin-top:0">⌥⇧H</span>
+  </div>
+
+  <div class="row">
+    <button id="resetHidden" type="button">Show hidden items (0)</button>
+    <span class="muted" style="margin-top:0" id="pickNote"></span>
+  </div>
+
+  <div class="row">
+    <span>Hidden this session</span>
+    <span class="stat" id="hiddenCount">0</span>
+  </div>
+
+  <div class="row">
+    <span class="status"><span class="dot" id="ollamaDot"></span>Ollama</span>
+    <span id="ollamaText">checking…</span>
+  </div>
+
+  <div class="row">
+    <label for="model">Model</label>
+    <select id="model"></select>
+  </div>
+
+  <div class="row">
+    <label for="highThreshold" title="Heuristic score at/above which a post is hidden without asking the model">Hide at score ≥</label>
+    <input type="number" id="highThreshold" min="1" max="100" />
+  </div>
+
+  <div class="row">
+    <label for="lowThreshold" title="Heuristic score at/below which a post is passed as human without asking the model">Pass at score ≤</label>
+    <input type="number" id="lowThreshold" min="0" max="99" />
+  </div>
+
+  <div class="row">
+    <label for="claudeApiKey" title="Optional. Used only when Ollama is unreachable; borderline post text is then sent to the Claude API">Claude key (backup)</label>
+    <input type="password" id="claudeApiKey" placeholder="sk-ant-…" />
+  </div>
+
+  <div class="muted">Scores in between are sent to the local Ollama model. If Ollama is off, borderline posts go to Claude when a key is set — otherwise they are left visible.</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
